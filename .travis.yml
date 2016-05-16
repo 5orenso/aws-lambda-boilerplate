@@ -1,7 +1,6 @@
 language: node_js
 node_js:
 - '4.3'
-- '5.2'
 matrix:
   fast_finish: true
 before_install: npm install -g grunt-cli
@@ -27,6 +26,7 @@ deploy:
   local_dir: dist
   acl: private
   detect_encoding: true
+  skip_cleanup: true
 notifications:
     email:
         on_failure: always

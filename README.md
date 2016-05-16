@@ -2,11 +2,12 @@
 [![Build Status](https://travis-ci.org/5orenso/aws-lambda-boilerplate.svg?branch=master)](https://travis-ci.org/5orenso/aws-lambda-boilerplate)
 [![Coverage Status](https://coveralls.io/repos/github/5orenso/aws-lambda-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/5orenso/aws-lambda-boilerplate?branch=master)
 
-A good start for a AWS Lambda function with auto deployment to S3.
+A good start for an AWS Lambda function with automated deployment to S3.
 
 Features:
-* Boilerplate for Lamda function
-* Automated unit tests with Grunt and Buster.js
+* Boilerplate for AWS Lamda functions.
+* Automated unit tests with Grunt and Buster.js.
+* Code style and hits with JSCS and JSHint.
 * CI integration with Travis.
 * Automated deployment to S3 with Travis.
 

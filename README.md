@@ -11,10 +11,21 @@ Features:
 * Automated deployment to S3 with Travis.
 
 
-## Getting started
+## Getting started with development
 ```
-$ gem install travis
-
-
-
+$ git clone
+$ npm install
+$ grunt watch
 ```
+
+## Travis setup
+To get auto deployment to S3 working you need to integrate with Travis CI.
+
+### Steps
+1. Connect your Github.com repo to your Travis CI account. 
+2. Add `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` to your Travis CI environment. 
+3. Edit `.travis.yml` to match your `bucket`, `upload-dir` and `region`.
+
+Next time you push to your master brach Travis will run your tests and if all is green deploy the code to your S3 bucket.
+
+Isn't this great? :D

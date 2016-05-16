@@ -63,7 +63,7 @@ module.exports = function (grunt) {
             }
         },
         coveralls: {
-            real_coverage: {
+            realCoverage: {
                 src: 'coverage/lcov.info'
             }
         }
@@ -81,8 +81,8 @@ module.exports = function (grunt) {
 
     // Default task.
     grunt.registerTask('lint', ['jshint', 'jscs']);
-    grunt.registerTask('default', ['lint', 'buster:unit', 'coveralls:real_coverage']);
-    grunt.registerTask('coverage', ['coveralls:real_coverage']);
+    grunt.registerTask('default', ['lint', 'buster:unit', 'coveralls:realCoverage']);
+    grunt.registerTask('coverage', ['coveralls:realCoverage']);
     grunt.registerTask('test', 'buster:unit');
     grunt.registerTask('check', ['watch']);
     grunt.registerTask('run', ['buster:unit', 'nodemon:dev']);

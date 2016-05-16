@@ -7,7 +7,9 @@ var myFile = 'Hello World!';
 
 var AWS = require('aws-sdk-mock');
 AWS.mock('S3', 'getObject', function (params, callback) {
-    console.log(params);
+    if (params.Bucket === 'boom') {
+        callback('BOOM!');
+    }
     callback(undefined, myFile);
 });
 
@@ -29,6 +31,16 @@ buster.testCase('Test aws module', {
                 })
                 .catch(function (error) {
                     console.error(error);
+                });
+        },
+        'getObject should blow up': function (done) {
+            myAws.s3GetObject('boom', 'my-key')
+                .then(function (result) {
+                    console.log(result);
+                })
+                .catch(function (error) {
+                    assert.equals(error, 'BOOM!');
+                    done();
                 });
         }
     }

@@ -24,6 +24,7 @@ deploy:
   bucket: my-deploy-test-bucket
   region: eu-west-1
   local_dir: dist
+  upload-dir: lambda
   acl: private
   detect_encoding: true
   skip_cleanup: true

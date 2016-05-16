@@ -3,7 +3,7 @@
 module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
-        latestTag: 'emr-pig-runner',
+        latestTag: 'aws-lambda-boilerplate',
         pkg: grunt.file.readJSON('package.json'),
 
         jshint: {
@@ -52,13 +52,13 @@ module.exports = function (grunt) {
                     'mv ./node_modules ./node_modules2',
                     'npm install --production',
                     'zip -FSr  dist/<%= latestTag %>.zip ./ ' +
-                    '-x "*dist*" "*.md" "*.DS_Store" "*.sh" "*test*" "package.json" "Gruntfile.js" ' +
+                    '-x "*dist*" "*.md" "*.DS_Store" "*.sh" "*test*" "package.json" "Gruntfile.js" "*.git*" ' +
                     '"*node_modules2*" "*coverage/*" ".js*"',
                     'rm -rf node_modules',
                     'mv ./node_modules2 ./node_modules',
                     'echo ""',
                     'echo TODO:',
-                    'echo s3cmd put dist/<%= latestTag %>.zip s3://tsn-insight-lambda-functions/'
+                    'echo s3cmd put dist/<%= latestTag %>.zip s3://my-deploy-test-bucket/'
                 ].join('&&')
             }
         }

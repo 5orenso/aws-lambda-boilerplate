@@ -24,8 +24,7 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   bucket: my-deploy-test-bucket
   region: eu-west-1
-  endpoint: my-deploy-test-bucket.s3-website-eu-west-1.amazonaws.com
-  local-dir: dist
+  local_dir: dist
   acl: private
   detect_encoding: true
 notifications:

@@ -1,7 +1,6 @@
 # aws-lambda-boilerplate
 [![Build Status](https://travis-ci.org/5orenso/aws-lambda-boilerplate.svg?branch=master)](https://travis-ci.org/5orenso/aws-lambda-boilerplate)
-[![Coverage Status](https://coveralls.io/repos/5orenso/aws-lambda-boilerplate/badge.svg?branch=master)](https://coveralls.io/r/5orenso/aws-lambda-boilerplate?branch=master)
-
+[![Coverage Status](https://coveralls.io/repos/github/5orenso/aws-lambda-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/5orenso/aws-lambda-boilerplate?branch=master)
 A good start for a AWS Lambda function with auto deployment to S3.
 
 Features:

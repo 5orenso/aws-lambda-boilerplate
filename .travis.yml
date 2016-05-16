@@ -17,12 +17,17 @@ install:
 - npm install
 - npm install -g npm
 sudo: false
+script: "grunt build"
 deploy:
   provider: s3
-  access_key_id: MY-ACCESS-KEY
-  secret_access_key:
-    secure: MY-ENCRYPTED-ACCESS-SECRET
-  bucket: my-bucket
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: my-deploy-test-bucket
+  region: eu-west-1
+  endpoint: my-deploy-test-bucket.s3-website-eu-west-1.amazonaws.com
+  local-dir: dist
   acl: private
-  on:
-    repo: 5orenso/aws-lambda-boilerplate
+  detect_encoding: true
+notifications:
+    email:
+        on_failure: always

@@ -31,3 +31,4 @@ deploy:
 notifications:
     email:
         on_failure: always
+

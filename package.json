@@ -1,0 +1,39 @@
+{
+  "name": "aws-lambda-boilerplate",
+  "description": "A good start to make a lambda function",
+  "version": "0.1.0",
+  "homepage": "https://github.com/5orenso/aws-lambda-boilerplate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/5orenso/aws-lambda-boilerplate"
+  },
+  "bugs": {
+    "url": "https://github.com/5orenso/aws-lambda-boilerplate/issues"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">=4.3.0"
+  },
+  "scripts": {
+    "test": "grunt",
+    "start": "node index.js -c config-dist.js"
+  },
+  "devDependencies": {
+    "aws-sdk-mock": "^1.0.10",
+    "buster": "^0.7.18",
+    "buster-istanbul": "^0.1.15",
+    "grunt": "^0.4.5",
+    "grunt-buster": "^0.4.1",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-coveralls": "^1.0.0",
+    "grunt-jscs": "^2.5.0",
+    "grunt-nodemon": "^0.4.0",
+    "grunt-shell": "^1.1.2"
+  },
+  "keywords": [],
+  "dependencies": {
+    "aws-sdk": "^2.3.8"
+  }
+}

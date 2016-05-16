@@ -61,6 +61,11 @@ module.exports = function (grunt) {
                     'echo s3cmd put dist/<%= latestTag %>.zip s3://my-deploy-test-bucket/'
                 ].join('&&')
             }
+        },
+        coveralls: {
+            real_coverage: {
+                src: 'coverage/lcov.info'
+            }
         }
     });
 
@@ -76,7 +81,8 @@ module.exports = function (grunt) {
 
     // Default task.
     grunt.registerTask('lint', ['jshint', 'jscs']);
-    grunt.registerTask('default', ['lint', 'buster:unit']);
+    grunt.registerTask('default', ['lint', 'buster:unit', 'coveralls:real_coverage']);
+    grunt.registerTask('coverage', ['coveralls:real_coverage']);
     grunt.registerTask('test', 'buster:unit');
     grunt.registerTask('check', ['watch']);
     grunt.registerTask('run', ['buster:unit', 'nodemon:dev']);

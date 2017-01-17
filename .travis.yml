@@ -21,10 +21,10 @@ deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  bucket: my-deploy-test-bucket
+  bucket: my-lambda-deploy-test-bucket
   region: eu-west-1
   local_dir: dist
-  upload-dir: lambda
+  # upload-dir: lambda
   acl: private
   detect_encoding: true
   skip_cleanup: true

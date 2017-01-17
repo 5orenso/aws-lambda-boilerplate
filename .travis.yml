@@ -16,7 +16,7 @@ install:
 - npm install
 - npm install -g npm
 sudo: false
-script: "grunt build"
+after_success: "grunt build"
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY

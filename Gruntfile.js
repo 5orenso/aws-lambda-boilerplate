@@ -3,9 +3,9 @@
 module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
-        latestTag: 'aws-lambda-boilerplate',
+        packetName: 'aws-lambda-boilerplate',
+        staticLambdaBucket: 'my-lambda-deploy-test-bucket',
         pkg: grunt.file.readJSON('package.json'),
-
         jshint: {
             options: {
                 jshintrc: '.jshintrc'
@@ -35,32 +35,26 @@ module.exports = function (grunt) {
         buster: {
             unit: {}
         },
-        nodemon: {
-            dev: {
-                options: {
-                    // nodeArgs: ['--debug'],
-                    file: 'index.js',
-                    args: ['-c', '../config/config-dist.js']
-                },
-                tasks: ['buster:unit']
-            }
-        },
         shell: {
+            // jscs:disable
             multiple: {
                 command: [
                     'mkdir -p dist',
                     'mv ./node_modules ./node_modules2',
                     'npm install --production',
-                    'zip -FSr  dist/<%= latestTag %>.zip ./ ' +
-                    '-x "*dist*" "*.md" "*.DS_Store" "*.sh" "*test*" "package.json" "Gruntfile.js" "*.git*" ' +
-                    '"*node_modules2*" "*coverage/*" ".js*"',
+                    'zip -FSr  dist/<%= packetName %>.zip ./ ' +
+                        '-x "*dist*" "bin/*" ".git*" "*.md" "*.DS_Store" "*.sh" "*test*" ' +
+                        '"package.json" "Gruntfile.js" ' +
+                        '"*node_modules2*" "*coverage/*" ".js*" "*doc/*"',
                     'rm -rf node_modules',
                     'mv ./node_modules2 ./node_modules',
                     'echo ""',
-                    'echo TODO:',
-                    'echo s3cmd put dist/<%= latestTag %>.zip s3://my-deploy-test-bucket/'
+                    'echo "TODO:"',
+                    'echo "Upload the zip file to S3 to be able to run it from Lambda."',
+                    'echo "$ aws s3 cp dist/<%= packetName %>.zip s3://<%= staticLambdaBucket %>/<%= packetName %>.zip"'
                 ].join('&&')
             }
+            // jscs:enable
         },
         coveralls: {
             realCoverage: {
@@ -73,7 +67,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-buster');
     grunt.loadNpmTasks('grunt-jscs');
@@ -85,7 +78,6 @@ module.exports = function (grunt) {
     grunt.registerTask('coverage', ['coveralls:realCoverage']);
     grunt.registerTask('test', 'buster:unit');
     grunt.registerTask('check', ['watch']);
-    grunt.registerTask('run', ['buster:unit', 'nodemon:dev']);
     grunt.registerTask('artifact', ['shell']);
     grunt.registerTask('build', ['artifact']);
 };

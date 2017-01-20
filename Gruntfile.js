@@ -40,7 +40,7 @@ module.exports = function (grunt) {
         shell: {
             // jscs:disable
             getCurrentBranch: {
-                command: 'git rev-parse --abbrev-ref HEAD',
+                command: 'git symbolic-ref --short HEAD',
                 options: {
                     callback: function (err, stdout, stderr, cb) {
                         stdout = stdout.trim();

@@ -45,10 +45,10 @@ module.exports = function (grunt) {
                     callback: function (err, stdout, stderr, cb) {
                         stdout = stdout.trim();
                         // If we have a leading 'v' in the version, remove it
-                        if (stdout != 'master') {
+                        if (stdout !== 'master') {
                             grunt.config.set('currentBranch', '-' + stdout);
                         }
-                        console.log('Current branch: ', stdout)
+                        console.log('Current branch: ', stdout);
                         cb();
                     }
                 }

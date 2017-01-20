@@ -2,11 +2,16 @@
 
 module.exports = function (grunt) {
     require('time-grunt')(grunt);
-
+    let currentBranchName = (process.env.TRAVIS_PULL_REQUEST_BRANCH === '' ?
+        process.env.TRAVIS_BRANCH : process.env.TRAVIS_PULL_REQUEST_BRANCH);
+    if (currentBranchName === 'master') {
+        currentBranchName = '';
+    } else {
+        currentBranchName = '-' + currentBranchName;
+    }
     // Project configuration.
     grunt.initConfig({
-        currentBranch: (process.env.TRAVIS_PULL_REQUEST_BRANCH === '' ?
-            process.env.TRAVIS_BRANCH : process.env.TRAVIS_PULL_REQUEST_BRANCH),
+        currentBranch: currentBranchName,
         packetName: 'aws-lambda-boilerplate',
         staticLambdaBucket: 'my-lambda-deploy-test-bucket',
         pkg: grunt.file.readJSON('package.json'),

@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function (grunt) {
+    require('time-grunt')(grunt);
+
     // Project configuration.
     grunt.initConfig({
         packetName: 'aws-lambda-boilerplate',
@@ -37,12 +39,26 @@ module.exports = function (grunt) {
         },
         shell: {
             // jscs:disable
+            getCurrentBranch: {
+                command: 'git rev-parse --abbrev-ref HEAD',
+                options: {
+                    callback: function (err, stdout, stderr, cb) {
+                        stdout = stdout.trim();
+                        // If we have a leading 'v' in the version, remove it
+                        if (stdout != 'master') {
+                            grunt.config.set('currentBranch', '-' + stdout);
+                        }
+                        console.log('Current branch: ', stdout)
+                        cb();
+                    }
+                }
+            },
             multiple: {
                 command: [
                     'mkdir -p dist',
                     'mv ./node_modules ./node_modules2',
                     'npm install --production',
-                    'zip -FSr  dist/<%= packetName %>.zip ./ ' +
+                    'zip -FSr  dist/<%= packetName %><%= currentBranch %>.zip ./ ' +
                         '-x "*dist*" "bin/*" ".git*" "*.md" "*.DS_Store" "*.sh" "*test*" ' +
                         '"package.json" "Gruntfile.js" ' +
                         '"*node_modules2*" "*coverage/*" ".js*" "*doc/*"',
@@ -51,7 +67,7 @@ module.exports = function (grunt) {
                     'echo ""',
                     'echo "TODO:"',
                     'echo "Upload the zip file to S3 to be able to run it from Lambda."',
-                    'echo "$ aws s3 cp dist/<%= packetName %>.zip s3://<%= staticLambdaBucket %>/<%= packetName %>.zip"'
+                    'echo "$ aws s3 cp dist/<%= packetName %><%= currentBranch %>.zip s3://<%= staticLambdaBucket %>/<%= packetName %><%= currentBranch %>.zip"'
                 ].join('&&')
             }
             // jscs:enable

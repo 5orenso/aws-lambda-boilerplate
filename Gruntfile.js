@@ -5,6 +5,7 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
+        currentBranch: (process.env.TRAVIS_PULL_REQUEST_BRANCH === '' ? process.env.TRAVIS_PULL_REQUEST_BRANCH : process.env.TRAVIS_BRANCH),
         packetName: 'aws-lambda-boilerplate',
         staticLambdaBucket: 'my-lambda-deploy-test-bucket',
         pkg: grunt.file.readJSON('package.json'),
@@ -39,20 +40,6 @@ module.exports = function (grunt) {
         },
         shell: {
             // jscs:disable
-            getCurrentBranch: {
-                command: 'git symbolic-ref --short HEAD',
-                options: {
-                    callback: function (err, stdout, stderr, cb) {
-                        stdout = stdout.trim();
-                        // If we have a leading 'v' in the version, remove it
-                        if (stdout !== 'master') {
-                            grunt.config.set('currentBranch', '-' + stdout);
-                        }
-                        console.log('Current branch: ', stdout);
-                        cb();
-                    }
-                }
-            },
             multiple: {
                 command: [
                     'mkdir -p dist',

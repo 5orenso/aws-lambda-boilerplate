@@ -12,10 +12,8 @@ config['EMR pig runner tests'] = {
         format: 'lcov'
     },
     sources: [
-        'lib/**/*.js',
-        '!Gruntfile.js',
-        '!index.js',
-        '!run.js'
+        '*.js',
+        '!Gruntfile.js'
     ],
     extensions: [
         require('buster-istanbul')

@@ -14,6 +14,7 @@ module.exports = function (grunt) {
         currentBranch: currentBranchName,
         packetName: 'aws-lambda-boilerplate',
         staticLambdaBucket: 'my-lambda-deploy-test-bucket',
+        autoLambdaBucket: 'my-lambda-autodeploy-lambda-bucket',
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
             options: {
@@ -59,8 +60,11 @@ module.exports = function (grunt) {
                     'mv ./node_modules2 ./node_modules',
                     'echo ""',
                     'echo "TODO:"',
-                    'echo "Upload the zip file to S3 to be able to run it from Lambda."',
-                    'echo "$ aws s3 cp dist/<%= packetName %><%= currentBranch %>.zip s3://<%= staticLambdaBucket %>/<%= packetName %><%= currentBranch %>.zip"'
+                    'echo "First time: Upload the zip file to S3 to be able to run it from Lambda."',
+                    'echo "$ aws s3 cp dist/<%= packetName %><%= currentBranch %>.zip s3://<%= staticLambdaBucket %>/<%= packetName %><%= currentBranch %>.zip"',
+                    'echo ""',
+                    'echo "Next time: Upload the zip file to S3 to have the Lambda function automatically updated."',
+                    'echo "$ aws s3 cp dist/<%= packetName %><%= currentBranch %>.zip s3://<%= autoLambdaBucket %>/<%= packetName %><%= currentBranch %>.zip"',
                 ].join('&&')
             }
             // jscs:enable

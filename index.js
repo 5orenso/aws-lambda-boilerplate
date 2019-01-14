@@ -1,23 +1,24 @@
 'use strict';
-/**
- * @fileOverview Lambda handler API Gateway requests.
- * @name Lambda handler
- */
 
 /**
- * Lambda handler.
- * @param {object} event - Object passed on from AWS Lambda.
- * @param {object} context - Object passed on from AWS Lambda.
- * @param {function} callback - Should be called when done..
- */
-exports.handler = function(event, context, callback) {
+* @fileOverview Lambda handler API Gateway requests.
+* @name Lambda handler
+*/
+
+/**
+* Lambda handler.
+* @param {object} event - Object passed on from AWS Lambda.
+* @param {object} context - Object passed on from AWS Lambda.
+* @param {function} callback - Should be called when done..
+*/
+exports.handler = function lambdaEventHandler(event, context, callback) {
     // console.log('Received event:', JSON.stringify(event, null, 2));
     const done = (err, res) => callback(null, {
         statusCode: err ? 400 : 200,
         body: err ? err.message : JSON.stringify(res),
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+        },
     });
 
     switch (event.httpMethod) {
@@ -48,6 +49,4 @@ exports.handler = function(event, context, callback) {
         default:
             done(new Error(`Unsupported method "${event.httpMethod}"`));
     }
-
 };
-

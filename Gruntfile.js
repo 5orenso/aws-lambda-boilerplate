@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports = function (grunt) {
-    require('time-grunt')(grunt);
+module.exports = function gruntConfig(grunt) {
+    require('time-grunt')(grunt); // eslint-disable-line
     let currentBranchName = (process.env.TRAVIS_PULL_REQUEST_BRANCH === '' ?
         process.env.TRAVIS_BRANCH : process.env.TRAVIS_PULL_REQUEST_BRANCH);
     if (currentBranchName === 'master' || currentBranchName == null) {
         currentBranchName = '';
     } else {
-        currentBranchName = '-' + currentBranchName;
+        currentBranchName = `-${currentBranchName}`;
     }
     // Project configuration.
     grunt.initConfig({
@@ -16,37 +16,23 @@ module.exports = function (grunt) {
         staticLambdaBucket: 'my-lambda-deploy-test-bucket',
         autoLambdaBucket: 'my-lambda-autodeploy-lambda-bucket',
         pkg: grunt.file.readJSON('package.json'),
-        jshint: {
+        eslint: {
             options: {
-                jshintrc: '.jshintrc'
+                config: '.eslintrc.json',
+                reset: true,
             },
-            gruntfile: {
-                src: 'Gruntfile.js'
-            },
-            lib: {
-                src: ['*.js', 'lib/**/*.js']
-            },
-            test: {
-                src: ['test/**/*.js']
-            }
-        },
-        jscs: {
-            main: ['*.js', 'test/**/*.js', 'lib/**/*.js'],
-            options: {
-                config: '.jscsrc'
-            }
+            target: ['*.js', 'test/**/*.js', 'lib/**/*.js'],
         },
         watch: {
             all: {
                 files: ['test/**/*.js', '*.js', 'lib/**/*.js'],
-                tasks: ['lint', 'buster:unit']
-            }
+                tasks: ['lint', 'buster:unit'],
+            },
         },
         buster: {
-            unit: {}
+            unit: {},
         },
         shell: {
-            // jscs:disable
             multiple: {
                 command: [
                     'mkdir -p dist',
@@ -61,32 +47,33 @@ module.exports = function (grunt) {
                     'echo ""',
                     'echo "TODO:"',
                     'echo "First time: Upload the zip file to S3 to be able to run it from Lambda."',
-                    'echo "$ aws s3 cp dist/<%= packetName %><%= currentBranch %>.zip s3://<%= staticLambdaBucket %>/<%= packetName %><%= currentBranch %>.zip"',
+                    'echo "$ aws s3 cp dist/<%= packetName %><%= currentBranch %>.zip s3://<%= staticLambdaBucket %>/'
+                        + '<%= packetName %><%= currentBranch %>.zip"',
                     'echo ""',
                     'echo "Next time: Upload the zip file to S3 to have the Lambda function automatically updated."',
-                    'echo "$ aws s3 cp dist/<%= packetName %><%= currentBranch %>.zip s3://<%= autoLambdaBucket %>/<%= packetName %><%= currentBranch %>.zip"',
-                ].join('&&')
-            }
-            // jscs:enable
+                    'echo "$ aws s3 cp dist/<%= packetName %><%= currentBranch %>.zip s3://<%= autoLambdaBucket %>/'
+                        + '<%= packetName %><%= currentBranch %>.zip"',
+                ].join('&&'),
+            },
         },
         coveralls: {
             realCoverage: {
-                src: 'coverage/lcov.info'
-            }
-        }
+                src: 'coverage/lcov.info',
+            },
+        },
     });
 
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-buster');
-    grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-coveralls');
+    grunt.loadNpmTasks('grunt-eslint');
 
     // Default task.
-    grunt.registerTask('lint', ['jshint', 'jscs']);
+    grunt.registerTask('es', ['eslint']);
+    grunt.registerTask('lint', ['eslint']);
     grunt.registerTask('default', ['lint', 'buster:unit', 'coveralls:realCoverage']);
     grunt.registerTask('coverage', ['coveralls:realCoverage']);
     grunt.registerTask('test', 'buster:unit');

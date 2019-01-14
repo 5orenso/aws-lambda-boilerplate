@@ -1,21 +1,20 @@
-var config = module.exports;
+const config = module.exports;
 
-config['EMR pig runner tests'] = {
+config['AWS Lambda'] = {
     environment: 'node',
     rootPath: '../',
     tests: [
-        'test/**/*-test.js'
+        'test/**/*-test.js',
     ],
-    // buster-istanbul setup
     'buster-istanbul': {
         outputDirectory: 'coverage',
-        format: 'lcov'
+        format: 'lcov',
     },
     sources: [
         '*.js',
-        '!Gruntfile.js'
+        '!Gruntfile.js',
     ],
     extensions: [
-        require('buster-istanbul')
-    ]
+        require('buster-istanbul'), // eslint-disable-line
+    ],
 };

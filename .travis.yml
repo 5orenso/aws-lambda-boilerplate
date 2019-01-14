@@ -1,20 +1,15 @@
 language: node_js
 node_js:
-- '4.3'
+  - "8.11"
 matrix:
     fast_finish: true
+cache:
+  directories:
+    - node_modules
+    - $(npm config get prefix)/bin/grunt-cli
 before_install: npm install -g grunt-cli
-# env:
-# - CXX=g++-4.8
-# addons:
-#   apt:
-#     sources:
-#     - ubuntu-toolchain-r-test
-#     packages:
-#     - g++-4.8
 install:
-- npm install
-- npm install -g npm
+  - npm install --no-optional
 sudo: false
 after_success: "grunt build"
 deploy:
@@ -33,4 +28,3 @@ deploy:
 notifications:
     email:
         on_failure: always
-

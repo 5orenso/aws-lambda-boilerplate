@@ -9,7 +9,7 @@ __Features:__
 * Boilerplate for [AWS Lamda](https://aws.amazon.com/lambda/) functions.
 * Automated unit tests with [Grunt](http://gruntjs.com/) and [Buster.js](http://docs.busterjs.org/en/latest/).
 * Code coverage with [Istanbul](https://istanbul.js.org/) and reports to [Coveralls.io](https://coveralls.io/)
-* Code style and hits with [JSCS](http://jscs.info/) and [JSHint](http://jshint.com/).
+* Code style and hits with [ESLint](https://eslint.org/).
 * CI integration with [Travis](https://travis-ci.org/).
 * Automated deployment to [AWS S3](https://aws.amazon.com/s3/) with Travis.
 * And last but not least; deployment with [AWS CloudFormation](https://aws.amazon.com/cloudformation/)

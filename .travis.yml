@@ -11,20 +11,6 @@ before_install: npm install -g grunt-cli
 install:
   - npm install --no-optional
 sudo: false
-after_success: "grunt build"
-deploy:
-    on:
-        all_branches: true
-    provider: s3
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: my-lambda-deploy-test-bucket
-    region: eu-west-1
-    local_dir: dist
-    # upload-dir: lambda
-    acl: private
-    detect_encoding: true
-    skip_cleanup: true
 notifications:
     email:
         on_failure: always

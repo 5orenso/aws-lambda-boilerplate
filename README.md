@@ -7,8 +7,8 @@ A good start for an AWS Lambda function with automated deployment to S3 when pus
 
 __Features:__
 * Boilerplate for [AWS Lamda](https://aws.amazon.com/lambda/) functions.
-* Automated unit tests with [Grunt](http://gruntjs.com/) and [Buster.js](http://docs.busterjs.org/en/latest/).
-* Code coverage with [Istanbul](https://istanbul.js.org/) and reports to [Coveralls.io](https://coveralls.io/)
+* Automated unit tests with [NPM](https://www.npmjs.com/) and [Jest](https://jestjs.io/).
+* Code coverage with [Jest](https://jestjs.io/).
 * Code style and hits with [ESLint](https://eslint.org/).
 * CI integration with [Travis](https://travis-ci.org/).
 * Automated deployment to [AWS S3](https://aws.amazon.com/s3/) with Travis.
@@ -22,7 +22,7 @@ $ git clone
 $ npm install
 $ cp ./bin/set-env-dist.sh ./bin/set-env.sh
 $ . ./bin/set-env.sh
-$ grunt watch
+$ npm run test:watch
 ```
 
 
@@ -30,7 +30,7 @@ $ grunt watch
 
 ```bash
 # Build file:
-$ grunt build
+$ npm run build
 ```
 
 

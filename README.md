@@ -38,6 +38,9 @@ $ npm run build
 
 To get auto deployment to S3 working you need to integrate with Travis CI and Coveralls.io.
 
+```bash
+$ travis encrypt COVERALLS_REPO_TOKEN=<super_secret coveralls token> --add env.global
+```
 
 ### Steps for preparing your repo:
 

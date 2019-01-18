@@ -39,10 +39,12 @@
         "lint": "eslint ./index.js",
         "test": "jest --coverage",
         "test:watch": "jest --watch",
-        "build": "bash ./bin/build-release.sh"
+        "build": "bash ./bin/build-release.sh",
+        "coverage": "jest --coverage --coverageReporters=text-lcov | coveralls"
     },
     "devDependencies": {
         "aws-sdk-mock": "^4.3.0",
+        "coveralls": "^3.0.2",
         "eslint": "^5.12.0",
         "eslint-config-airbnb": "^17.1.0",
         "eslint-config-airbnb-base": "^13.1.0",

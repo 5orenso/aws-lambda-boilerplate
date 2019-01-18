@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/5orenso/aws-lambda-boilerplate.svg?branch=master)](https://travis-ci.org/5orenso/aws-lambda-boilerplate)
 [![Coverage Status](https://coveralls.io/repos/github/5orenso/aws-lambda-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/5orenso/aws-lambda-boilerplate?branch=master)
 
-A good start for an AWS Lambda function with automated deployment to S3 when pushed to Github.com. If you combine this with the [aws-lambda-autodeploy-lambda](https://github.com/5orenso/aws-lambda-autodeploy-lambda) you will have a very fast deployment process. When you push code to Github.com it will only take a couple of minutes to run all your test, deploy you code to S3 and refresh the Lambda function. All automatic while you're drinking a fresh cup of newly brewed coffee.
+A good start for an AWS Lambda function. If you combine this with the [aws-lambda-autodeploy-lambda](https://github.com/5orenso/aws-lambda-autodeploy-lambda) you will have a very fast deployment process. When you push code to Github.com it will only take a couple of minutes to run all your test, deploy you code to S3 and refresh the Lambda function. All automatic while you're drinking a fresh cup of newly brewed coffee.
 
 __Features:__
 * Boilerplate for [AWS Lamda](https://aws.amazon.com/lambda/) functions.
@@ -11,7 +11,6 @@ __Features:__
 * Code coverage with [Jest](https://jestjs.io/).
 * Code style and hits with [ESLint](https://eslint.org/).
 * CI integration with [Travis](https://travis-ci.org/).
-* Automated deployment to [AWS S3](https://aws.amazon.com/s3/) with Travis.
 * And last but not least; deployment with [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
 
 
@@ -26,21 +25,43 @@ $ npm run test:watch
 ```
 
 
+### Run all tests
+
+```bash
+$ npm test
+```
+
+
+### Lint all of the relevant code
+
+```bash
+$ npm run lint
+```
+
+
 ### Build a new release
 
 ```bash
-# Build file:
 $ npm run build
+```
+
+
+### Report coverage to Coveralls.io
+
+```bash
+$ npm run coverage
 ```
 
 
 ## Travis and Coveralls setup
 
-To get auto deployment to S3 working you need to integrate with Travis CI and Coveralls.io.
+To get auto coveralls reporting working you need to add your encrypted Coveralls token in `.travis.yml`.
 
+This is how you do it:
 ```bash
 $ travis encrypt COVERALLS_REPO_TOKEN=<super_secret coveralls token> --add env.global
 ```
+
 
 ### Steps for preparing your repo:
 
@@ -50,7 +71,7 @@ $ travis encrypt COVERALLS_REPO_TOKEN=<super_secret coveralls token> --add env.g
 4. Copy `.coveralls-dist.yml` to `.coveralls.yml` and add you secret key.
 
 
-Next time you push to your master brach Travis will run your tests and if all is green deploy the code to your S3 bucket.
+Next time you push to your master brach Travis will run your tests and if all is green report coverage to Coveralls.
 
 Isn't this great? :D
 
@@ -84,7 +105,6 @@ $ npm install -g npm-check-updates
 $ ncu -u
 $ npm install --save --no-optional
 ```
-
 
 
 ## Other Resources

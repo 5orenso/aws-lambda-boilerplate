@@ -53,6 +53,13 @@ $ npm run coverage
 ```
 
 
+### Update changelog
+
+```bash
+$ bash ./changelog.sh
+```
+
+
 ## Travis and Coveralls setup
 
 To get auto coveralls reporting working you need to add your encrypted Coveralls token in `.travis.yml`.

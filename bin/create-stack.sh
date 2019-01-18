@@ -2,8 +2,6 @@
 
 set -e;
 
-STACK_NAME=${LAMBDA_FUNCTION_NAME:-'aws-lambda-boilerplate'}
-
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
     DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
@@ -15,6 +13,8 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 if [ -f $DIR/set-env.sh ]; then
     . $DIR/set-env.sh
 fi
+
+STACK_NAME=${LAMBDA_FUNCTION_NAME:-'aws-lambda-boilerplate'}
 
 # Read command line input:
 while [[ $# > 0 ]]; do

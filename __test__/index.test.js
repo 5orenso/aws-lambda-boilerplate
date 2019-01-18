@@ -73,13 +73,14 @@ const apiGwLambdaBadRequstResponse = {
 };
 
 test('adds 1 + 2 to equal 3', () => {
-  expect(1 + 2).toBe(3);
+    expect(1 + 2).toBe(3);
 });
 
 test('GET test cases: Should return querystring input in the correct format', () => {
-    index.handler(apiGwLambdaRequest, undefined, (error, result) => {
-        expect(result).toEqual(apiGwLambdaResponse);
-    });
+    index.handler(apiGwLambdaRequest)
+        .then((result) => {
+            expect(result).toEqual(apiGwLambdaResponse);
+        });
 });
 
 test('POST test cases: Should return querystring input in the correct format', () => {
@@ -91,9 +92,10 @@ test('POST test cases: Should return querystring input in the correct format', (
         body: '{"q":"test"}',
         queryStringParameters: {},
     });
-    index.handler(request, undefined, (error, result) => {
-        expect(result).toEqual(apiGwLambdaResponse);
-    });
+    index.handler(request)
+        .then((result) => {
+            expect(result).toEqual(apiGwLambdaResponse);
+        });
 });
 
 test('PUT test cases: Should return querystring input in the correct format', () => {
@@ -105,9 +107,10 @@ test('PUT test cases: Should return querystring input in the correct format', ()
         body: '{"q":"test"}',
         queryStringParameters: {},
     });
-    index.handler(request, undefined, (error, result) => {
-        expect(result).toEqual(apiGwLambdaResponse);
-    });
+    index.handler(request)
+        .then((result) => {
+            expect(result).toEqual(apiGwLambdaResponse);
+        });
 });
 
 test('PATCH test cases: Should return querystring input in the correct format', () => {
@@ -119,9 +122,10 @@ test('PATCH test cases: Should return querystring input in the correct format', 
         body: '{"q":"test"}',
         queryStringParameters: {},
     });
-    index.handler(request, undefined, (error, result) => {
-        expect(result).toEqual(apiGwLambdaResponse);
-    });
+    index.handler(request)
+        .then((result) => {
+            expect(result).toEqual(apiGwLambdaResponse);
+        });
 });
 
 test('DELETE test cases: Should return querystring input in the correct format', () => {
@@ -133,9 +137,10 @@ test('DELETE test cases: Should return querystring input in the correct format',
         body: '{"q":"test"}',
         queryStringParameters: {},
     });
-    index.handler(request, undefined, (error, result) => {
-        expect(result).toEqual(apiGwLambdaResponse);
-    });
+    index.handler(request)
+        .then((result) => {
+            expect(result).toEqual(apiGwLambdaResponse);
+        });
 });
 
 test('COPY test cases: Should return querystring input in the correct format', () => {
@@ -147,9 +152,10 @@ test('COPY test cases: Should return querystring input in the correct format', (
         body: '{"q":"test"}',
         queryStringParameters: {},
     });
-    index.handler(request, undefined, (error, result) => {
-        expect(result).toEqual(apiGwLambdaResponse);
-    });
+    index.handler(request)
+        .then((result) => {
+            expect(result).toEqual(apiGwLambdaResponse);
+        });
 });
 
 test('HEAD test cases: Should return querystring input in the correct format', () => {
@@ -162,9 +168,10 @@ test('HEAD test cases: Should return querystring input in the correct format', (
     const response = Object.assign({}, apiGwLambdaResponse, {
         body: '{}',
     });
-    index.handler(request, undefined, (error, result) => {
-        expect(result).toEqual(response);
-    });
+    index.handler(request)
+        .then((result) => {
+            expect(result).toEqual(response);
+        });
 });
 
 test('OPTIONS test cases: Should return querystring input in the correct format', () => {
@@ -176,9 +183,10 @@ test('OPTIONS test cases: Should return querystring input in the correct format'
         body: '{"q":"test"}',
         queryStringParameters: {},
     });
-    index.handler(request, undefined, (error, result) => {
-        expect(result).toEqual(apiGwLambdaResponse);
-    });
+    index.handler(request)
+        .then((result) => {
+            expect(result).toEqual(apiGwLambdaResponse);
+        });
 });
 
 test('BADREQUEST test cases: Should return querystring input in the correct format', () => {
@@ -190,7 +198,8 @@ test('BADREQUEST test cases: Should return querystring input in the correct form
         body: '{"q":"test"}',
         queryStringParameters: {},
     });
-    index.handler(request, undefined, (error, result) => {
-        expect(result).toEqual(apiGwLambdaBadRequstResponse);
-    });
+    index.handler(request)
+        .then((result) => {
+            expect(result).toEqual(apiGwLambdaBadRequstResponse);
+        });
 });

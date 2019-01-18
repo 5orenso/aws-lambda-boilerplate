@@ -12,8 +12,7 @@
         },
         "LambdaS3Key": {
             "Description": "The location and name of your source code .zip file.",
-            "Type": "String",
-            "Default": "aws-lambda-boilerplate.zip"
+            "Type": "String"
         }
     },
     "Resources": {
@@ -76,7 +75,7 @@
                     }
                 },
                 "Role": {"Fn::GetAtt": ["LambdaRole", "Arn"]},
-                "Runtime": "nodejs4.3",
+                "Runtime": "nodejs8.10",
                 "Timeout": 30
             }
         }

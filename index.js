@@ -11,9 +11,9 @@
 * @param {object} context - Object passed on from AWS Lambda.
 * @param {function} callback - Should be called when done..
 */
-exports.handler = function lambdaEventHandler(event, context, callback) {
+exports.handler = async (event) => {
     // console.log('Received event:', JSON.stringify(event, null, 2));
-    const done = (err, res) => callback(null, {
+    const done = (err, res) => ({
         statusCode: err ? 400 : 200,
         body: err ? err.message : JSON.stringify(res),
         headers: {
@@ -23,30 +23,22 @@ exports.handler = function lambdaEventHandler(event, context, callback) {
 
     switch (event.httpMethod) {
         case 'GET':
-            done(null, event.queryStringParameters);
-            break;
+            return done(null, event.queryStringParameters);
         case 'POST':
-            done(null, JSON.parse(event.body));
-            break;
+            return done(null, JSON.parse(event.body));
         case 'PUT':
-            done(null, JSON.parse(event.body));
-            break;
+            return done(null, JSON.parse(event.body));
         case 'PATCH':
-            done(null, JSON.parse(event.body));
-            break;
+            return done(null, JSON.parse(event.body));
         case 'DELETE':
-            done(null, JSON.parse(event.body));
-            break;
+            return done(null, JSON.parse(event.body));
         case 'COPY':
-            done(null, JSON.parse(event.body));
-            break;
+            return done(null, JSON.parse(event.body));
         case 'HEAD':
-            done(null, {});
-            break;
+            return done(null, {});
         case 'OPTIONS':
-            done(null, JSON.parse(event.body));
-            break;
+            return done(null, JSON.parse(event.body));
         default:
-            done(new Error(`Unsupported method "${event.httpMethod}"`));
+            return done(new Error(`Unsupported method "${event.httpMethod}"`));
     }
 };

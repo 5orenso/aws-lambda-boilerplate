@@ -81,7 +81,7 @@ if [ ! -z "$HELP" ]; then
     echo "     $ bash ${0} --aws-profile myprofile --aws-region ${AWS_REGION}"
     echo ""
     echo "To update the stack:"
-    echo "     $ bash ${0} --aws-profile myprofile --aws-region ${AWS_REGION}"
+    echo "     $ bash ${0} --aws-profile myprofile --aws-region ${AWS_REGION} --update-stack"
     echo ""
     exit 1;
 fi

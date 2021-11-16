@@ -58,6 +58,6 @@
     },
     "keywords": [],
     "dependencies": {
-        "aws-sdk": "^2.3.8"
+        "aws-sdk": "^2.814.0"
     }
 }
